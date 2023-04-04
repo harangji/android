@@ -1,23 +1,87 @@
-# Compiled class file
-*.class
+package com.example.myapplication;
 
-# Log file
-*.log
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
-# BlueJ files
-*.ctxt
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.SubMenu;
+import android.widget.EditText;
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+public class MainActivity extends AppCompatActivity {
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+    EditText te;
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        te=(EditText) findViewById(R.id.text);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0,101,0, "빨강");
+        menu.add(0,102,0,"녹색");
+        menu.add(0,103,0,"파랑");
+        menu.add(0,104,0,"노랑");
+        menu.add(0,105,0,"하늘");
+        SubMenu sm,ssm;
+        sm=menu.addSubMenu("무채색");
+        sm.add(0,106,0,"흰색");
+        //sm.add(0,107,0,"회색");
+        ssm=sm.addSubMenu(0,107,0,"회색");
+        sm.add(0,108,0,"검정색");
+        //회색 서브메뉴
+        ssm.add(0,109,0,"밝은 회색");
+        ssm.add(0,110,0,"그냥 회색");
+        ssm.add(0,111,0,"짙은 회색");
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch ( item.getItemId()){
+            case 101:
+                te.setBackgroundColor(Color.RED);
+                break;
+            case 102:
+                te.setBackgroundColor(Color.GREEN);
+                break;
+            case 103:
+                te.setBackgroundColor(Color.BLUE);
+                break;
+            case 104:
+                te.setBackgroundColor(Color.YELLOW);
+                break;
+            case 105:
+                te.setBackgroundColor(Color.CYAN);
+                break;
+            case 106:
+                te.setBackgroundColor(Color.WHITE);
+                te.setTextColor(Color.BLACK);
+                break;
+//            case 107:
+//                te.setBackgroundColor(Color.GRAY);
+//                break;
+            case 108:
+                te.setBackgroundColor(Color.BLACK);
+                te.setTextColor(Color.WHITE);
+                break;
+            case 109:
+                te.setBackgroundColor(Color.LTGRAY);
+                break;
+            case 110:
+                te.setBackgroundColor(Color.GRAY);
+                break;
+            case 111:
+                te.setBackgroundColor(Color.DKGRAY);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}
