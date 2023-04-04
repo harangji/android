@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         menu.add(0,103,0,"파랑");
         menu.add(0,104,0,"노랑");
         menu.add(0,105,0,"하늘");
-        SubMenu sm,ssm;
+        SubMenu sm,ssm,sssm,ssssm;
         sm=menu.addSubMenu("무채색");
         sm.add(0,106,0,"흰색");
         //sm.add(0,107,0,"회색");
@@ -40,6 +40,15 @@ public class MainActivity extends AppCompatActivity {
         ssm.add(0,109,0,"밝은 회색");
         ssm.add(0,110,0,"그냥 회색");
         ssm.add(0,111,0,"짙은 회색");
+
+        sssm=menu.addSubMenu("문자 변경");
+        sssm.add(0,112,0,"안녕하세요");
+        sssm.add(0,113,0,"반가워요");
+        sssm.add(0,114,0,"또 봐요");
+        ssssm=sssm.addSubMenu("영어로");
+        ssssm.add(0,115,0,"GOOD NIGHT!");
+        ssssm.add(0,116,0,"GOOD BYE!");
+        ssssm.add(0,117,0,"SEE YOU!");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -81,6 +90,25 @@ public class MainActivity extends AppCompatActivity {
             case 111:
                 te.setBackgroundColor(Color.DKGRAY);
                 break;
+            case 112:
+                te.setText("안녕하세요");
+                break;
+            case 113:
+                te.setText("반가워요");
+                break;
+            case 114:
+                te.setText("또 봐요");
+                break;
+            case 115:
+                te.setText("GOOD NIGHT!");
+                break;
+            case 116:
+                te.setText("GOOD BYE!");
+                break;
+            case 117:
+                te.setText("SEE YOU!");
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }
