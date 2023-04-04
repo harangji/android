@@ -11,10 +11,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    Button si,re,it;
+    Button si,re,it,ha;
     View.OnClickListener cl;
     AlertDialog.Builder dlg;
-    DialogInterface.OnClickListener yes,no,cc;
+    DialogInterface.OnClickListener yes,no,cc,yes1,no2;
     String[] mobile={"SKT","KT","LG U+","기타"};
 
     @Override
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         si = (Button) findViewById(R.id.simple);
         re = (Button) findViewById(R.id.res);
         it = (Button) findViewById(R.id.item);
+        ha = (Button) findViewById(R.id.han);
 
         yes = new DialogInterface.OnClickListener() {
             @Override
@@ -36,6 +37,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 Toast.makeText(getApplicationContext(),"당신은 여자이군요",Toast.LENGTH_LONG).show();
+            }
+        };
+        yes1 = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(),"당신은 찬성하시는군요",Toast.LENGTH_LONG).show();
+            }
+        };
+        no2 = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(),"당신은 찬성하지 않으시는군요",Toast.LENGTH_LONG).show();
             }
         };
         cc = new DialogInterface.OnClickListener() {
@@ -75,12 +88,23 @@ public class MainActivity extends AppCompatActivity {
                         dlg.setPositiveButton("끝내기",null);
                         dlg.show();
                         break;
+
+                    case R.id.han:
+                        dlg = new AlertDialog.Builder(MainActivity.this);
+                        dlg.setTitle("요금 인상");
+                        dlg.setIcon(R.drawable.ic_launcher_background);
+                        dlg.setMessage("한전 요금 인상에 찬성합니까??");
+                        dlg.setPositiveButton("예",yes1);
+                        dlg.setNegativeButton("아니오",no2);
+                        dlg.show();
+                        break;
                 }
             }
         };
         si.setOnClickListener(cl);
         re.setOnClickListener(cl);
         it.setOnClickListener(cl);
+        ha.setOnClickListener(cl);
 
     }
 }
