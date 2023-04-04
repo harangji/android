@@ -1,0 +1,86 @@
+package com.example.myapplication;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    Button si,re,it;
+    View.OnClickListener cl;
+    AlertDialog.Builder dlg;
+    DialogInterface.OnClickListener yes,no,cc;
+    String[] mobile={"SKT","KT","LG U+","기타"};
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        si = (Button) findViewById(R.id.simple);
+        re = (Button) findViewById(R.id.res);
+        it = (Button) findViewById(R.id.item);
+
+        yes = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(),"당신은 남자이군요",Toast.LENGTH_LONG).show();
+            }
+        };
+        no = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(),"당신은 여자이군요",Toast.LENGTH_LONG).show();
+            }
+        };
+        cc = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(),"i="+i+"당신의 통신사는"+ mobile[i]+"입니다.",Toast.LENGTH_LONG).show();
+            }
+        };
+        cl = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch ( view.getId()) {
+                    case R.id.simple:
+                        dlg = new AlertDialog.Builder(MainActivity.this);
+                        dlg.setTitle("나의 소개");
+                        dlg.setIcon(R.drawable.ic_launcher_background);
+                        dlg.setMessage("나의 이름은 지하랑이고 남자입니다.");
+                        dlg.show();
+                        break;
+
+                    case R.id.res:
+                        dlg = new AlertDialog.Builder(MainActivity.this);
+                        dlg.setTitle("성별 판별");
+                        dlg.setIcon(R.drawable.ic_launcher_background);
+                        dlg.setMessage("당신은 남자입니까?");
+                        dlg.setPositiveButton("예",yes);
+                        dlg.setNegativeButton("아니오",no);
+                        dlg.show();
+                        break;
+
+                    case R.id.item:
+                        dlg = new AlertDialog.Builder(MainActivity.this);
+                        dlg.setTitle("통신사 선택");
+                        dlg.setIcon(R.drawable.ic_launcher_background);
+                        //dlg.setItems(mobile, cc);
+                        dlg.setSingleChoiceItems(mobile,3,cc);
+                        dlg.setPositiveButton("끝내기",null);
+                        dlg.show();
+                        break;
+                }
+            }
+        };
+        si.setOnClickListener(cl);
+        re.setOnClickListener(cl);
+        it.setOnClickListener(cl);
+
+    }
+}
