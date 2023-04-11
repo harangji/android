@@ -11,12 +11,12 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText txt;
-    Button inp;
+    EditText txt,txt2;
+    Button inp,inp2;
     View.OnClickListener cl;
     AlertDialog.Builder dlg;
-    View dview;
-    DialogInterface.OnClickListener yes,no;
+    View dview,dview2;
+    DialogInterface.OnClickListener yes,no,yes2,no2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
         txt= (EditText) findViewById(R.id.text);
         inp= (Button) findViewById(R.id.input);
+        inp2= (Button) findViewById(R.id.input2);
+        txt2= (EditText) findViewById(R.id.text2);
 
         no = new DialogInterface.OnClickListener() {
             @Override
@@ -40,7 +42,25 @@ public class MainActivity extends AppCompatActivity {
                 mi= (EditText) dview.findViewById(R.id.myid);
                 mp= (EditText) dview.findViewById(R.id.mypw);
 
-                txt.setText("당신의 id="+mi.getText().toString()+" 비밀번호="+mp.getText().toString());
+                txt.setText("당신의 id= "+mi.getText().toString()+" , password= "+mp.getText().toString());
+            }
+        };
+
+        no2 = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                txt2.setText("이름과 나이 입력을 취소하셨습니다.");
+            }
+        };
+
+        yes2 = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                EditText mn,mo;
+                mn= (EditText) dview2.findViewById(R.id.myname);
+                mo= (EditText) dview2.findViewById(R.id.myold);
+
+                txt2.setText("당신의 이름은 "+mn.getText().toString()+" 이고 나이는 "+mo.getText().toString()+" 입니다.");
             }
         };
 //        mi= (EditText) findViewById(R.id.myid);
@@ -61,11 +81,21 @@ public class MainActivity extends AppCompatActivity {
                         dlg.setNegativeButton("취소",no);
                         dlg.show();
                         break;
-
+                    case R.id.input2:
+                        dlg= new AlertDialog.Builder(MainActivity.this);
+                        dlg.setTitle("이름과 나이 입력");
+                        dlg.setIcon(R.drawable.ic_launcher_background);
+                        dview2 = (View) View.inflate(getApplicationContext(),R.layout.input2,null);
+                        dlg.setView(dview2);
+                        dlg.setPositiveButton("완료",yes2);
+                        dlg.setNegativeButton("취소",no2);
+                        dlg.show();
+                        break;
 
                 }
             }
         };
         inp.setOnClickListener(cl);
+        inp2.setOnClickListener(cl);
     }
 }
