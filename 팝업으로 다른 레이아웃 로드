@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RatingBar;
+import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,16 +64,21 @@ public class MainActivity extends AppCompatActivity {
                 RadioButton mal,fem;
                 mn= (EditText) dview2.findViewById(R.id.myname);
                 mo= (EditText) dview2.findViewById(R.id.myold);
+                RatingBar rb;
+                SeekBar sk;
+
                 String s;
                 s= "당신의 이름은 "+mn.getText().toString()+" 이고 나이는 "+mo.getText().toString()+" 입니다.";
 
                 mal=(RadioButton) dview2.findViewById(R.id.male);
                 fem=(RadioButton) dview2.findViewById(R.id.female);
+                rb=(RatingBar) findViewById(R.id.rating);
+                sk=(SeekBar) findViewById(R.id.seekBar);
 
                 if(mal.isChecked()==true){
-                    s = s+"성별은 남성이군요";
+                    s = s+"남성";
                 } else if (fem.isChecked()) {
-                    s = s+"성별은 여성이군요";
+                    s = s+"여성 만족도="+rb.getRating()+" 볼륨="+sk.getProgress();
                 }
 
                 txt2.setText(s);
