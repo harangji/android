@@ -1,0 +1,71 @@
+package com.example.myapplication;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText txt;
+    Button inp;
+    View.OnClickListener cl;
+    AlertDialog.Builder dlg;
+    View dview;
+    DialogInterface.OnClickListener yes,no;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        txt= (EditText) findViewById(R.id.text);
+        inp= (Button) findViewById(R.id.input);
+
+        no = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                txt.setText("id와 pw 입력을 취소하셨습니다.");
+            }
+        };
+
+        yes = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                EditText mi,mp;
+                mi= (EditText) dview.findViewById(R.id.myid);
+                mp= (EditText) dview.findViewById(R.id.mypw);
+
+                txt.setText("당신의 id="+mi.getText().toString()+" 비밀번호="+mp.getText().toString());
+            }
+        };
+//        mi= (EditText) findViewById(R.id.myid);
+//        mp= (EditText) findViewById(R.id.mypw);
+
+        cl= new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()){
+                    case R.id.input:
+                        dlg= new AlertDialog.Builder(MainActivity.this);
+                        dlg.setTitle("id, pw 입력");
+                        dlg.setIcon(R.drawable.ic_launcher_background);
+                        //dlg.setMessage("반가웡");
+                        dview = (View) View.inflate(getApplicationContext(),R.layout.input,null);
+                        dlg.setView(dview);
+                        dlg.setPositiveButton("완료",yes);
+                        dlg.setNegativeButton("취소",no);
+                        dlg.show();
+                        break;
+
+
+                }
+            }
+        };
+        inp.setOnClickListener(cl);
+    }
+}
