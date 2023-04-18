@@ -1,0 +1,69 @@
+package com.example.myapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    class MyView extends View {
+        Paint p;
+        float x1,y1,x2,y2; //드래그 할 때 마우스 좌표 소수점까지 받아옴
+
+        MyView(Context c) {
+            super(c);
+            p = new Paint();
+        }
+
+        @Override
+        protected void onDraw(Canvas canvas) {
+            super.onDraw(canvas);
+            p.setStyle(Paint.Style.STROKE);
+            p.setStrokeWidth(5);
+            p.setColor(Color.RED);
+            canvas.drawRect(x1,y1,x2,y2,p); //사각형
+            //canvas.drawLine(x1,y1,x2,y2,p); //직선
+            //canvas.drawCircle(200,300,100, p); //원
+
+        }
+
+
+        @Override
+        public boolean onTouchEvent(MotionEvent event) {  // event =>
+            switch ( event.getAction() ){
+                case MotionEvent.ACTION_DOWN: //키 눌림
+                    x1 = event.getX();
+                    y1 = event.getY();
+                    Toast.makeText(getApplicationContext(),"x1= "+x1+" y1= "+y1,Toast.LENGTH_LONG).show();
+                    break;
+
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_MOVE:
+                    x2 = event.getX();
+                    y2 = event.getY();
+                    invalidate();
+                    break;
+
+            }
+
+            return true;
+        }
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        MyView mv;
+        mv = new MyView(this);
+        setContentView(mv);
+
+       // setContentView(R.layout.activity_main);
+    }
+}
