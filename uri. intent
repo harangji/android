@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <EditText
+        android:id="@+id/input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="" />
+<!--    uri 목록-->
+<!--tel :-->
+<!--http://-->
+<!--mail-->
+<!--smsto-->
+<!--geo-->
+
+    <Button
+        android:id="@+id/run"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="실행" />
+
+    <Button
+        android:id="@+id/call"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="전화걸기" />
+
+    <Button
+        android:id="@+id/sms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="문자보내기" />
+
+</LinearLayout>
+
+----------------------------------------------------------------
+package com.example.myapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText inp;
+    Button run, call,sms;
+    View.OnClickListener cl;
+    Intent i;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        inp = (EditText) findViewById(R.id.input);
+        run = (Button) findViewById(R.id.run);
+        call = (Button) findViewById(R.id.call);
+        sms = (Button) findViewById(R.id.sms);
+
+        cl = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                i = new Intent();
+                i.setAction(Intent.ACTION_VIEW);
+
+                switch (view.getId()){
+                    case R.id.run :
+                        i.setData(Uri.parse(inp.getText().toString()));
+                        break;
+
+                    case R.id.call :
+                        i.setData(Uri.parse("tel:"+inp.getText().toString()));
+                        break;
+
+                    case R.id.sms :
+                        i.setData(Uri.parse("smsto:"+inp.getText().toString()));
+                        break;
+                }
+                startActivity(i);
+            }
+        };
+        run.setOnClickListener(cl);
+        call.setOnClickListener(cl);
+        sms.setOnClickListener(cl);
+    }
+}
