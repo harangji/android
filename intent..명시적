@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.add:
                         i =new Intent(getApplicationContext(),plus.class); //자바 파일 컴파일->다이트코드  class
                         i.putExtra("mykey1",n1.getText().toString());
-                        i.putExtra("mykey2",n2.getText().toString());
+                        i.putExtra("mykey2",Integer.parseInt(n2.getText().toString()));
                         startActivity(i);
                         break;
                 }
@@ -140,7 +140,7 @@ public class plus extends Activity {
 
         i = getIntent();
         n1 = Integer.parseInt(i.getStringExtra("mykey1"));
-        n2 = Integer.parseInt(i.getStringExtra("mykey2"));
+        n2 = i.getIntExtra("mykey2",0);
         n3 = n1+n2;
         res.setText("합계 = "+n3);
 
