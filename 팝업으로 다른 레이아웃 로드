@@ -1,5 +1,3 @@
-요거랑 context메뉴 롱클릭 반드시 나옴
-
 package com.example.myapplication;
 
 import androidx.appcompat.app.AlertDialog;
